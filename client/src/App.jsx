@@ -1,12 +1,13 @@
-import './App.css'
+import "./App.css";
+import Logo from "./components/Logo";
+import Title from "./components/Title"
 
 function App() {
-
   return (
     <>
-    <p>tsunami</p>
+      <Title/>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

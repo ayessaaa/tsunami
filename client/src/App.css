@@ -1,1 +1,16 @@
 @import "tailwindcss";
+@font-face {
+  font-family: super-water;
+  src: url("./fonts/Super Water.ttf");
+}
+@font-face {
+  font-family: handwriting;
+  src: url("./fonts/Handwriting-Regular.ttf");
+}
+body {
+  font-family: handwriting;
+  background-image: url("imgs/bg.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: 0 -120px;
+}
