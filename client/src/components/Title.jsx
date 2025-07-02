@@ -24,23 +24,29 @@ function Title() {
           <rect width="300" height="5" fill="white" rx="5" ry="5" />
         </svg>
         <div>
-          <Logo />
+          <Logo height={"h-70"} />
         </div>
         <svg className="opacity-70  mt-50">
           <rect width="300" height="5" fill="white" rx="5" ry="5" />
         </svg>
       </div>
-      <p className="text-center text-white text-5xl -mt-15">
+      <p className="text-center text-white text-5xl -mt-25">
         listen to anonymous music recommendations!
       </p>
 
-      <div className="flex mx-auto w-fit gap-5">
-        <img src="./imgs/controls/prev.png" alt="" className="h-20 my-auto" />
-        <img src="./imgs/controls/play.png" alt="" className="h-20" />
-        <img src="./imgs/controls/next.png" alt="" className="h-20 my-auto" />
-      </div>
+      <Controls />
     </div>
   );
+}
+
+function Controls(){
+  return (
+    <div className="flex mx-auto w-fit gap-5 mt-10">
+        <img src="./imgs/controls/prev.png" alt="" className="h-20 my-auto" />
+        <img src="./imgs/controls/play.png" alt="" className="h-26" />
+        <img src="./imgs/controls/next.png" alt="" className="h-20 my-auto" />
+      </div>
+  )
 }
 
 export default Title;
