@@ -15,7 +15,6 @@ function Home() {
         <Card img="./imgs/drawings/bottle2.png" text="open a letter" imgsize="size-70" />
         <Card img="./imgs/drawings/letter2.png" text="write a letter" imgsize="size-70"/>
       </div>
-      <Letter/>
     </>
   );
 }

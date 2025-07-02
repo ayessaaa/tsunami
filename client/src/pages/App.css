@@ -25,11 +25,26 @@ body,
   cursor: url("./imgs/cursor/pointer.png"), auto;
 }
 
+.text,
+textarea,
+input {
+  cursor: url("./imgs/cursor/text.png"), auto;
+}
+
 .letter {
   border-image-slice: 147 143 169 165 fill;
-  border-image-width: 100px;
+  border-image-width: 70px;
   border-image-outset: 0px 0px 0px 0px;
   border-image-repeat: stretch stretch;
   border-image-source: url("./imgs/cards/letter.png");
+  border-style: solid;
+}
+
+.button {
+  border-image-slice: 113 93 113 93 fill;
+  border-image-width: 70px;
+  border-image-outset: 0px 0px 0px 0px;
+  border-image-repeat: stretch stretch;
+  border-image-source: url("./imgs/cards/wave.png");
   border-style: solid;
 }
