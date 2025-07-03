@@ -14,15 +14,8 @@ app.use(express.json());
 let cachedToken = null;
 let tokenExpiry = null;
 
-app.listen(5000, () => {
-  console.log("server on port 5000");
-});
 
-app.get("/", (req, res) => {
-  res.send("hello world");
-});
-
-export const getSpotifyToken = async () => {
+const getSpotifyToken = async () => {
   const now = Date.now();
 
   if (cachedToken && tokenExpiry && now < tokenExpiry) {
@@ -49,6 +42,11 @@ export const getSpotifyToken = async () => {
   return cachedToken;
 };
 
+// ROUTES
+app.get("/", (req, res) => {
+  res.send("hello world");
+});
+
 app.get("/spotify-search", async (req, res) => {
   const { q, type } = req.query;
   if (!q || !type) {
@@ -71,4 +69,20 @@ app.get("/spotify-search", async (req, res) => {
     console.error("Spotify search failed:", err.message);
     res.status(500).json({ error: "Spotify search error" });
   }
+});
+
+// db postgres routes
+
+// create
+
+// update
+
+// delete
+
+// select all
+
+// select
+
+app.listen(5000, () => {
+  console.log("server on port 5000");
 });
