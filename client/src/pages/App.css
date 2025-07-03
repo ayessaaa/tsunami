@@ -28,7 +28,7 @@ body,
 .text,
 textarea,
 input {
-  cursor: url("./imgs/cursor/text.png"), auto;
+  cursor: url("./imgs/cursor/text2.png"), auto;
 }
 
 .letter {

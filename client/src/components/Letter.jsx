@@ -1,9 +1,33 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import Logo from "./Logo";
 
 function Letter() {
+  const [query, setQuery] = useState("");
+  const [tracks, setTracks] = useState([]);
+  const [songSelected, setSongSelected] = useState("")
+
+  async function searchSong(query) {
+    try {
+      const res = await axios.get(`/spotify-search`, {
+        params: { q: query, type: "track" },
+      });
+      console.log(res.data);
+      setTracks(res.data.tracks.items);
+    } catch (err) {
+      console.error(err.response?.data || err.message);
+    }
+  }
+
+  function handleSongSelect(track){
+    setSongSelected(track)
+    setQuery("")
+  }
+
+  useEffect(()=>{query!== ""? searchSong(query): setTracks([])}, [query])
   return (
     <form>
-      <div className="letter  w-[50%] mx-auto py-10  text-[#82734B] drop-shadow-[0px_5px_7px_rgba(0,0,0,.2)]">
+      <div className="letter  w-[50%] mx-auto py-10  text-[#82734B] drop-shadow-[0px_5px_7px_rgba(0,0,0,.2)] transition-all">
         <p className="w-fit ml-auto text-6xl pointer text-white -mt-10 mr-3">
           x
         </p>
@@ -12,20 +36,41 @@ function Letter() {
           <textarea className="text bg-[#BBAC7A]/40 rounded-xl w-full text-3xl py-3 px-5 mt-3 hover:bg-[#BBAC7A]/50 transition-all active:scale-102 focus:ring-3 focus:ring-[#BBAC7A] focus:outline-0 focus:bg-[#BBAC7A]/50"></textarea>
           <div className="mt-5 flex gap-10">
             <div className="">
-              <p className="text-4xl">search a song:</p>
+              <p className="text-3xl">search a song:</p>
               <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
                 type="text"
-                className="bg-[#BBAC7A]/40 rounded-xl w-full text-2xl py-1 px-3 mt-3 hover:bg-[#BBAC7A]/50 transition-all active:scale-102 focus:ring-3 focus:ring-[#BBAC7A] focus:outline-0 focus:bg-[#BBAC7A]/50"
+                className="bg-[#BBAC7A]/40 rounded-xl w-full text-2xl py-1 px-3 hover:bg-[#BBAC7A]/50 transition-all active:scale-102 focus:ring-3 focus:ring-[#BBAC7A] focus:outline-0 focus:bg-[#BBAC7A]/50"
               />
+              <div className="flex flex-col gap-1 mt-2">
+                {tracks.map((track) => (
+                  <li key={track.id} className="flex items-center space-x-4 bg-white/80 p-2 rounded-xl pointer" onClick={()=>handleSongSelect(track)}>
+                    <img
+                      src={track.album.images[0]?.url}
+                      alt={track.name}
+                      width={60}
+                      height={60}
+                      className="rounded-lg"
+                    />
+                    <div>
+                      <div className="font-bold">{track.name}</div>
+                      <div className="text-sm text-gray-500">
+                        {track.artists.map((a) => a.name).join(", ")}
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </div>
             </div>
-            <div className="flex gap-3 bg-white/40 p-4 rounded-xl">
+            <div className="flex gap-3 bg-white/40 p-3 rounded-lg h-fit">
               <img
-                src="./imgs/song/cover.jpg"
+                src={songSelected !== "" ? songSelected.album.images[0]?.url : "./imgs/song/cover_default.png"}
                 className="h-16 rounded-xl"
               ></img>
               <div className="mt-auto">
-                <p className="text-2xl">take a chance with me</p>
-                <p className="text-xl -mt-1 text-[#82734B]/70 -mb-1">NIKI</p>
+                <p className="text-2xl">{songSelected !== "" ? songSelected.name : "no song selected"}</p>
+                <p className="text-xl -mt-1 text-[#82734B]/70 -mb-1">{songSelected !== "" ? songSelected.artists.map((a) => a.name).join(", ") : ":("}</p>
               </div>
             </div>
           </div>

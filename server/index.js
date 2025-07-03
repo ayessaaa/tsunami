@@ -63,7 +63,7 @@ app.get("/spotify-search", async (req, res) => {
       params: {
         q,
         type,
-        limit: 10,
+        limit: 3,
       },
     });
     res.json(response.data);
