@@ -1,8 +1,31 @@
+import { Link, useNavigate } from "react-router";
+import { useEffect } from "react";
+import axios from "axios";
+
 import Letter from "../components/Letter";
 import Logo from "../components/Logo";
 import WaveButton from "../components/WaveButton";
 
+const API_URL = import.meta.env.VITE_API_BASE_URL;
+
 function WriteLetter() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const verifyCookie = async () => {
+      try {
+        const { data } = await axios.get(API_URL + "/check-auth", {
+          withCredentials: true,
+        });
+        console.log("Authenticated");
+      } catch (err) {
+        console.log("Auth failed:", err.response?.data || err.message);
+        navigate("/log-in");
+      }
+    };
+
+    verifyCookie();
+  }, [navigate]);
   return (
     <div>
       <Logo height="h-50" />
@@ -15,7 +38,7 @@ function WriteLetter() {
         </p>
         <Letter />
       </div>
-      <WaveButton text1="throw it to the sea" text2="ship! ship!"/>
+      <WaveButton text1="throw it to the sea" text2="ship! ship!" />
     </div>
   );
 }

@@ -170,7 +170,7 @@ app.post("/login", async (req, res) => {
 
         if (result) {
           // res.json({ authenticated: true });
-          const token = createToken(user.id);
+          const token = createToken(user.rows[0].id);
 
           res.cookie("token", token, {
             httpOnly: true,

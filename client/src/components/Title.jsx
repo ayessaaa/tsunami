@@ -1,5 +1,6 @@
+import { Link } from "react-router";
 import Logo from "./Logo";
-import 'animate.css';
+import "animate.css";
 
 function Title() {
   return (
@@ -39,14 +40,19 @@ function Title() {
   );
 }
 
-function Controls(){
+function Controls() {
   return (
     <div className="flex mx-auto w-fit gap-5 mt-10">
-        <img src="./imgs/controls/prev.png" alt="" className="h-20 my-auto" />
+      <img src="./imgs/controls/prev.png" alt="" className="h-20 my-auto" />
+      <Link
+        to={"/home"}
+        className="pointer hover:scale-105 transition-all hover:rotate-10"
+      >
         <img src="./imgs/controls/play.png" alt="" className="h-26" />
-        <img src="./imgs/controls/next.png" alt="" className="h-20 my-auto" />
-      </div>
-  )
+      </Link>
+      <img src="./imgs/controls/next.png" alt="" className="h-20 my-auto" />
+    </div>
+  );
 }
 
 export default Title;

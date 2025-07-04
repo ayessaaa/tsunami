@@ -17,7 +17,7 @@ function Home() {
         const { data } = await axios.get(API_URL+"/check-auth", {
           withCredentials: true,
         });
-        console.log("Authenticated:", data);
+        console.log("Authenticated");
       } catch (err) {
         console.log("Auth failed:", err.response?.data || err.message);
         navigate("/log-in");
