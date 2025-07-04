@@ -1,8 +1,9 @@
 import { Link } from "react-router";
+import WaveButton from "./WaveButton";
 
-function Form({ type }) {
+function Form({ handleSubmit, type, email, setEmail, password, setPassword }) {
   return (
-    <div>
+    <form onSubmit={(e)=>handleSubmit(e)}>
       <div
         className={`pb-10 w-120 border-10  rounded-3xl mx-auto mt-30  ${
           type === "signup"
@@ -30,22 +31,29 @@ function Form({ type }) {
             </p>
           </div>
         </div>
-        <form
+
+        <div
           className={` px-13 mt-10 ${
             type === "signup" ? "text-[#368b90]" : "text-white"
           }`}
         >
           <p className="text-3xl">email</p>
           <input
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             type="email"
             className="w-full px-3 py-1 text-xl bg-white rounded-xl text-[#368b90] focus:bg-[#368b90] focus:text-white transition-all active:scale-102 focus:outline-0 focus:ring-3 focus:ring-[#286e72]"
           ></input>
           <p className="text-3xl mt-5">password</p>
           <input
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             type="password"
             className="w-full px-3 py-1 text-xl bg-white rounded-xl text-[#368b90] focus:bg-[#368b90] focus:text-white transition-all active:scale-102 focus:outline-0 focus:ring-3 focus:ring-[#286e72]"
           ></input>
-        </form>
+        </div>
         <div className="mx-auto w-fit mt-10 ">
           <Link
             to={type === "signup" ? "/log-in" : "/sign-up"}
@@ -59,7 +67,8 @@ function Form({ type }) {
           </Link>
         </div>
       </div>
-    </div>
+      <WaveButton text1={type === "signup" ? "sign up!" : "log in!"} />
+    </form>
   );
 }
 

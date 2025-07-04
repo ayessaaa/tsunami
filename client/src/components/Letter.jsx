@@ -1,17 +1,22 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Logo from "./Logo";
+import { Link } from "react-router";
+
+const API_URL = import.meta.env.VITE_API_BASE_URL;
 
 function Letter() {
   const [query, setQuery] = useState("");
   const [tracks, setTracks] = useState([]);
   const [songSelected, setSongSelected] = useState("")
 
+  axios.defaults.withCredentials = true;
+
   async function searchSong(query) {
     try {
-      const res = await axios.get(`/spotify-search`, {
+      const res = await axios.get(API_URL+`/spotify-search`, {
         params: { q: query, type: "track" },
-      });
+      }, );
       console.log(res.data);
       setTracks(res.data.tracks.items);
     } catch (err) {
@@ -28,8 +33,8 @@ function Letter() {
   return (
     <form>
       <div className="letter  w-[50%] mx-auto py-10  text-[#82734B] drop-shadow-[0px_5px_7px_rgba(0,0,0,.2)] transition-all">
-        <p className="w-fit ml-auto text-6xl pointer text-white -mt-10 mr-3">
-          x
+        <p className="w-fit ml-auto text-6xl text-white -mt-10 mr-3 hover:rotate-10  transition-all">
+          <Link className="pointer" to={"/home"}>x</Link>
         </p>
         <div className="pt-5 pb-3 px-18 h-full w-full -mt-10">
           <p className="text-4xl">message:</p>
