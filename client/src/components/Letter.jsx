@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Logo from "./Logo";
 import { Link } from "react-router";
+import LetterCard from "./LetterCard";
 
 const API_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -47,12 +48,7 @@ function Letter({
   }, [query]);
   return (
     <form>
-      <div className="letter  w-[50%] mx-auto py-10  text-[#82734B] drop-shadow-[0px_5px_7px_rgba(0,0,0,.2)] transition-all">
-        <p className="w-fit ml-auto text-6xl text-white -mt-10 mr-3 hover:rotate-10  transition-all">
-          <Link className="pointer" to={"/home"}>
-            x
-          </Link>
-        </p>
+      <LetterCard>
         <div className="pt-5 pb-3 px-18 h-full w-full -mt-10">
           <p className="text-4xl">message:</p>
           <textarea className="text bg-[#BBAC7A]/40 rounded-xl w-full text-3xl py-3 px-5 mt-3 hover:bg-[#BBAC7A]/50 transition-all active:scale-102 focus:ring-3 focus:ring-[#BBAC7A] focus:outline-0 focus:bg-[#BBAC7A]/50" onChange={(e)=>setMessage(e.target.value)} value={message}></textarea>
@@ -111,7 +107,7 @@ function Letter({
             </div>
           </div>
         </div>
-      </div>
+      </LetterCard>
     </form>
   );
 }
