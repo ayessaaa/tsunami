@@ -5,6 +5,7 @@ import axios from "axios";
 import Card from "../components/Card";
 import Letter from "../components/Letter";
 import Logo from "../components/Logo";
+import MyLettersButton from "../components/MyLettersButton";
 
 const API_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -51,6 +52,8 @@ function Home() {
         />
         </Link>
       </div>
+
+      <MyLettersButton/>
     </>
   );
 }

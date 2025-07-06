@@ -76,14 +76,6 @@ function OpenLetter() {
     }
   }
 
-  function handleReplyButtonAction() {
-    if (!isReplyForm) {
-      setIsReplyForm(true);
-    } else {
-      handleReplyLetter();
-    }
-  }
-
   useEffect(() => {
     const verifyCookie = async () => {
       try {
