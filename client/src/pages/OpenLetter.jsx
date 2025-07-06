@@ -5,11 +5,14 @@ import Logo from "../components/Logo";
 import WaveButton from "../components/WaveButton";
 import LetterCard from "../components/LetterCard";
 import axios from "axios";
+import Letter from "../components/Letter";
 
 const API_URL = import.meta.env.VITE_API_BASE_URL;
 
 function OpenLetter() {
   const navigate = useNavigate();
+
+  const [letterId, setLetterId] = useState("");
 
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
@@ -18,10 +21,18 @@ function OpenLetter() {
   const [musicTitle, setMusicTitle] = useState("");
   const [musicImg, setMusicImg] = useState("");
 
+  const [songSelected, setSongSelected] = useState("");
+  const [messageReply, setMessageReply] = useState("");
+  const [musicArtistReply, setMusicArtistReply] = useState("");
+  const [musicTitleReply, setMusicTitleReply] = useState("");
+  const [musicImgReply, setMusicImgReply] = useState("");
+
   const [animation1, setAnimation1] = useState(false);
   const [animationText1, setAnimationText1] = useState(false);
   const [animation2, setAnimation2] = useState(false);
   const [animation3, setAnimation3] = useState(false);
+
+  const [isReplyForm, setIsReplyForm] = useState(false);
 
   async function handleOpenLetter() {
     setIsOpen(true);
@@ -33,8 +44,43 @@ function OpenLetter() {
       setMusicImg(data.music_img);
       setMusicTitle(data.music_title);
       setMessage(data.message);
+      setLetterId(data.id);
     } catch (err) {
       console.log(err);
+    }
+  }
+
+  async function handleReplyLetter() {
+    try {
+      const res = await axios.post(
+        API_URL + "/reply-letter",
+        {
+          letter_id: letterId,
+          message: messageReply,
+          music_title: musicTitleReply,
+          music_artist: musicArtistReply,
+          music_img: musicImgReply,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log(res);
+      window.location = "/home";
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+
+  function handleReplyButtonAction() {
+    if (!isReplyForm) {
+      setIsReplyForm(true);
+    } else {
+      handleReplyLetter();
     }
   }
 
@@ -153,13 +199,40 @@ function OpenLetter() {
             </div>
           </LetterCard>
 
-          <WaveButton
-            className={`${
-              animation3 ? "opacity-100" : "opacity-0 "
-            } duration-700 transition-all`}
-            text1={"reply!"}
-            text2={"share ur thoughts n reco also"}
-          ></WaveButton>
+          {isReplyForm && (
+            <Letter
+              message={messageReply}
+              setMessage={setMessageReply}
+              musicTitle={musicTitleReply}
+              setMusicTitle={setMusicTitleReply}
+              musicArtist={musicArtistReply}
+              setMusicArtist={setMusicArtistReply}
+              musicImg={musicImgReply}
+              setMusicImg={setMusicImgReply}
+              songSelected={songSelected}
+              setSongSelected={setSongSelected}
+            />
+          )}
+
+          {!isReplyForm ? (
+            <WaveButton
+              onClick={() => setIsReplyForm(true)}
+              className={`${
+                animation3 ? "opacity-100" : "opacity-0 "
+              } duration-700 transition-all`}
+              text1={"reply!"}
+              text2={"share ur thoughts n reco also"}
+            ></WaveButton>
+          ) : messageReply !== "" && songSelected ? (
+            <WaveButton
+              onClick={handleReplyLetter}
+              className={`animate__animated animate__fadeIn`}
+              text1={"reply!"}
+              text2={"toss that back to sender"}
+            ></WaveButton>
+          ) : (
+            ""
+          )}
         </div>
       )}
     </div>

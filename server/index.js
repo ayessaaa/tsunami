@@ -58,8 +58,27 @@ app.get("/get-letter", verifyToken, async (req, res) => {
       "SELECT * FROM letters WHERE from_user_id != $1 AND id NOT IN (SELECT letter_id FROM replies WHERE from_user_id = $1);",
       [req.userId]
     );
-    const randomLetter = allLetters.rows[Math.floor(Math.random() * allLetters.rows.length)];
+    const randomLetter =
+      allLetters.rows[Math.floor(Math.random() * allLetters.rows.length)];
     res.json(randomLetter);
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
+// reply to a letter
+app.post("/reply-letter", verifyToken, async (req, res) => {
+  try {
+    const from_user_id = req.userId;
+    const { letter_id, message, music_title, music_artist, music_img } =
+      req.body;
+
+    const newReply = await pool.query(
+      "INSERT INTO replies (letter_id, from_user_id, message, music_title, music_artist, music_img) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+      [letter_id, from_user_id, message, music_title, music_artist, music_img]
+    );
+
+    res.json(newReply.rows[0]);
   } catch (err) {
     console.log(err.message);
   }
