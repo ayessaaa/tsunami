@@ -124,7 +124,7 @@ function OpenLetter() {
           <LetterCard
             className={`mt-5 animate__animated animate__fadeIn letter transition-all duration-1000 ease-in-out overflow-hidden p-8 ${
               animation1 ? "w-[50%] " : "w-40 "
-            } ${animation2 ? "" : ""} `}
+            } `}
             x={false}
           >
             <div className="pt-5 pb-3 px-18 h-full w-full -mt-10">

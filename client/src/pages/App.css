@@ -48,3 +48,8 @@ input {
   border-image-source: url("./imgs/cards/wave.png");
   border-style: solid;
 }
+
+.input-transition {
+  transition-property: opacity, scale, ring;
+  transition-duration: 1000ms, 150ms;
+}

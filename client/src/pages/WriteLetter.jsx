@@ -16,6 +16,9 @@ function WriteLetter() {
   const [musicTitle, setMusicTitle] = useState("");
   const [musicArtist, setMusicArtist] = useState("");
   const [musicImg, setMusicImg] = useState("");
+  const [songSelected, setSongSelected] = useState("");
+
+  const [buttonAnimation, setButtonAnimation] = useState(false);
 
   useEffect(() => {
     const verifyCookie = async () => {
@@ -51,12 +54,21 @@ function WriteLetter() {
         }
       );
 
-      console.log(res)
+      console.log(res);
       window.location = "/home";
     } catch (err) {
       console.log(err.message);
     }
   }
+
+  useEffect(() => {
+    if (!(message !== "" && songSelected)) return;
+    const timer = setTimeout(() => {
+      setButtonAnimation(true);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [message, songSelected]);
   return (
     <div>
       <Logo height="h-50" />
@@ -76,9 +88,17 @@ function WriteLetter() {
           setMusicArtist={setMusicArtist}
           musicImg={musicImg}
           setMusicImg={setMusicImg}
+          songSelected={songSelected}
+          setSongSelected={setSongSelected}
         />
       </div>
-      <WaveButton onClick={handleAddLetter} text1="throw it to the sea" text2="ship! ship!" />
+      {message !== "" && songSelected ?<WaveButton
+        onClick={handleAddLetter}
+        text1="throw it to the sea"
+        text2="ship! ship!"
+        className={"animate__animated animate__fadeIn"}
+      /> :""}
+      
     </div>
   );
 }
