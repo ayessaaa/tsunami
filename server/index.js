@@ -49,6 +49,22 @@ app.post("/add-letter", verifyToken, async (req, res) => {
   }
 });
 
+// get random letter
+// - not from user
+// - not been replied by user
+app.get("/get-letter", verifyToken, async (req, res) => {
+  try {
+    const allLetters = await pool.query(
+      "SELECT * FROM letters WHERE from_user_id != $1 AND id NOT IN (SELECT letter_id FROM replies WHERE from_user_id = $1);",
+      [req.userId]
+    );
+    const randomLetter = allLetters.rows[Math.floor(Math.random() * allLetters.rows.length)];
+    res.json(randomLetter);
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
 // update
 
 // delete

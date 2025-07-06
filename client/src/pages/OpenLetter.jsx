@@ -1,23 +1,58 @@
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router";
+
 import Logo from "../components/Logo";
 import WaveButton from "../components/WaveButton";
 import LetterCard from "../components/LetterCard";
+import axios from "axios";
+
+const API_URL = import.meta.env.VITE_API_BASE_URL;
 
 function OpenLetter() {
+  const navigate = useNavigate();
+
   const [isOpen, setIsOpen] = useState(false);
-  const [message, setMessage] = useState(
-    "hi! try this out, i've been v obssessed w this lately"
-  );
+  const [message, setMessage] = useState("");
 
   const [musicArtist, setMusicArtist] = useState("");
-  const [musicTitle, setMusicTitmusicTitle] = useState("");
+  const [musicTitle, setMusicTitle] = useState("");
   const [musicImg, setMusicImg] = useState("");
-  const [songSelected, setSongSelected] = useState("");
 
   const [animation1, setAnimation1] = useState(false);
   const [animationText1, setAnimationText1] = useState(false);
   const [animation2, setAnimation2] = useState(false);
   const [animation3, setAnimation3] = useState(false);
+
+  async function handleOpenLetter() {
+    setIsOpen(true);
+    try {
+      const { data } = await axios.get(API_URL + "/get-letter", {
+        withCredentials: true,
+      });
+      setMusicArtist(data.music_artist);
+      setMusicImg(data.music_img);
+      setMusicTitle(data.music_title);
+      setMessage(data.message);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    const verifyCookie = async () => {
+      try {
+        const { data } = await axios.get(API_URL + "/check-auth", {
+          withCredentials: true,
+        });
+        console.log("Authenticated");
+      } catch (err) {
+        console.log("Auth failed:", err.response?.data || err.message);
+        navigate("/log-in");
+      }
+    };
+
+    verifyCookie();
+  }, [navigate]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -78,7 +113,7 @@ function OpenLetter() {
             className={
               "animate__animated animate__fadeIn animate__delay-2s mt-10"
             }
-            onClick={() => setIsOpen(true)}
+            onClick={handleOpenLetter}
           />
         </div>
       ) : (
@@ -106,28 +141,11 @@ function OpenLetter() {
                     animation2 ? "opacity-100 mt-0" : "opacity-0 -mt-20"
                   } `}
                 >
-                  <img
-                    src={
-                      songSelected !== ""
-                        ? musicImg
-                        : "./imgs/song/cover_default.png"
-                    }
-                    className="h-16 rounded-xl"
-                  ></img>
+                  <img src={musicImg} className="h-16 rounded-xl"></img>
                   <div className="mt-auto">
-                    <p className="text-2xl">
-                      {animation2
-                        ? songSelected !== ""
-                          ? musicTitle
-                          : "no song selected"
-                        : ""}
-                    </p>
+                    <p className="text-2xl">{animation2 ? musicTitle : ""}</p>
                     <p className="text-xl -mt-1 text-[#82734B]/70 -mb-1">
-                      {animation2
-                        ? songSelected !== ""
-                          ? musicArtist
-                          : ":("
-                        : ""}
+                      {animation2 ? musicArtist : ""}
                     </p>
                   </div>
                 </div>
@@ -135,7 +153,13 @@ function OpenLetter() {
             </div>
           </LetterCard>
 
-          <WaveButton className={`${animation3 ?"opacity-100" : "opacity-0 "} duration-700 transition-all`} text1={"reply!"} text2={"share ur thoughts n reco also"}></WaveButton>
+          <WaveButton
+            className={`${
+              animation3 ? "opacity-100" : "opacity-0 "
+            } duration-700 transition-all`}
+            text1={"reply!"}
+            text2={"share ur thoughts n reco also"}
+          ></WaveButton>
         </div>
       )}
     </div>
