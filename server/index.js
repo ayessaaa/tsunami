@@ -84,6 +84,43 @@ app.post("/reply-letter", verifyToken, async (req, res) => {
   }
 });
 
+// get my letters
+app.get("/my-letters", verifyToken, async (req, res) => {
+  try {
+    const from_user_id = req.userId;
+
+    const letters = await pool.query(
+      "SELECT * FROM letters WHERE from_user_id = $1;",
+      [from_user_id]
+    );
+
+    res.json(letters.rows);
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
+// get replies (for number of replies)
+app.get("/replies-number", verifyToken, async (req, res) => {
+  try {
+    const from_user_id = req.userId;
+
+    const replies = await pool.query(
+      `SELECT letters.id AS letter_id, COUNT(replies.id) AS reply_count
+      FROM letters
+      LEFT JOIN replies
+        ON replies.letter_id = letters.id AND replies.is_main_reply = true
+      WHERE letters.from_user_id = $1 
+      GROUP BY letters.id;`,
+      [from_user_id]
+    );
+
+    res.json(replies.rows);
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
 // update
 
 // delete

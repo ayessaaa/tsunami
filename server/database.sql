@@ -22,6 +22,7 @@ CREATE TABLE replies (
     id SERIAL PRIMARY KEY,
     letter_id INT NOT NULL,
     from_user_id INT NOT NULL,
+    reply_number INT NOT NULL,
     message VARCHAR(255) NOT NULL,
     music_title VARCHAR(255) NOT NULL,
     music_artist VARCHAR(255) NOT NULL,
