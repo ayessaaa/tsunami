@@ -30,7 +30,7 @@ function Home() {
 
   return (
     <>
-      <div className="mt-30">
+      <div className="mt-20">
         <Logo height={"h-50"} />
         <p className="text-center text-white text-2xl -mt-10">
           listen to anonymous music recommendations!

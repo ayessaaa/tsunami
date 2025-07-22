@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import LetterCard from "../components/LetterCard";
 import Logo from "../components/Logo";
 import axios from "axios";
@@ -9,6 +9,24 @@ const API_URL = import.meta.env.VITE_API_BASE_URL;
 function MyLetters() {
   const [letters, setLetters] = useState([]);
   const [repliesNumber, setRepliesNumber] = useState([])
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    const verifyCookie = async () => {
+      try {
+        const { data } = await axios.get(API_URL+"/check-auth", {
+          withCredentials: true,
+        });
+        console.log("Authenticated");
+      } catch (err) {
+        console.log("Auth failed:", err.response?.data || err.message);
+        navigate("/log-in");
+      }
+    };
+
+    verifyCookie();
+  }, [navigate]);
 
   useEffect(() => {
     const fetchLetter = async () => {

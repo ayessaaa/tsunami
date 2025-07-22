@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import axios from "axios";
 import LetterCard from "../components/LetterCard";
 import { useEffect, useState } from "react";
@@ -7,6 +7,8 @@ import Logo from "../components/Logo";
 const API_URL = import.meta.env.VITE_API_BASE_URL;
 
 function Replies() {
+  const navigate = useNavigate();
+
   const { id } = useParams();
 
   const [letter, setLetter] = useState([]);
@@ -15,6 +17,22 @@ function Replies() {
   const [animation2, setAnimation2] = useState(false);
   const [animation3, setAnimation3] = useState(false);
   const [animation4, setAnimation4] = useState(false);
+
+  useEffect(() => {
+    const verifyCookie = async () => {
+      try {
+        const { data } = await axios.get(API_URL + "/check-auth", {
+          withCredentials: true,
+        });
+        console.log("Authenticated");
+      } catch (err) {
+        console.log("Auth failed:", err.response?.data || err.message);
+        navigate("/log-in");
+      }
+    };
+
+    verifyCookie();
+  }, [navigate]);
 
   useEffect(() => {
     async function fetchLetter() {
@@ -112,7 +130,7 @@ function Replies() {
       </LetterCard>
       <div className={`mt-10  `}>
         <p className={`text-4xl text-white text-center duration-1000 transition-all mb-5 ${animation3 ? "opacity-100": "opacity-0"}`}>replies</p>
-        {letter.map((reply) => (
+        {letter.length<1 ? letter.map((reply) => (
           <LetterCard x={false} className={`w-[40%] duration-1000 transition-all mb-5 ${animation4 ? "opacity-100": "opacity-0"}`}>
             <div className="pt-8 pb-1 px-18 h-full w-full -mt-10">
               <p
@@ -138,7 +156,8 @@ function Replies() {
               </div>
             </div>
           </LetterCard>
-        ))}
+        )) : <p className={`text-center text-2xl text-[#368b90] duration-1000 transition-all ${animation4 ? "opacity-100": "opacity-0"}`}>no replies yet :( ... </p>}
+        {}
       </div>
     </div>
   );
