@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import OpenLetter from "./pages/OpenLetter";
 import MyLetters from "./pages/MyLetters";
+import Replies from "./pages/Replies";
 
 const root = document.getElementById("root");
 
@@ -20,6 +21,7 @@ ReactDOM.createRoot(root).render(
       <Route path="/write-letter" element={<WriteLetter />} />
       <Route path="/open-letter" element={<OpenLetter />} />
       <Route path="/my-letters" element={<MyLetters />} />
+      <Route path="/replies/:id" element={<Replies />} />
     </Routes>
   </BrowserRouter>
 );

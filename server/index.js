@@ -121,6 +121,43 @@ app.get("/replies-number", verifyToken, async (req, res) => {
   }
 });
 
+// get letter and its replies
+app.get("/letter/:id", verifyToken, async (req, res) => {
+  try {
+    const from_user_id = req.userId;
+    const letter_id = req.params.id
+
+    const replies = await pool.query(
+      `SELECT
+        letters.*,
+        replies.id AS reply_id,
+        replies.message AS reply_message,
+        replies.from_user_id AS reply_from_user_id,
+        replies.is_main_reply,
+        replies.created_at AS reply_created_at,
+        replies.music_title AS reply_music_title,
+        replies.music_artist AS reply_music_artist,
+        replies.music_img AS reply_music_img
+      FROM letters
+      LEFT JOIN replies ON replies.letter_id = letters.id
+      WHERE letters.id = $1
+      ORDER BY replies.created_at;
+      `,
+      [letter_id]
+    );
+
+
+    if(replies.rows[0].from_user_id === from_user_id) {
+      res.json(replies.rows);
+    }else{
+      res.json({"message": "unauthorized"});
+    }
+
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
 // update
 
 // delete

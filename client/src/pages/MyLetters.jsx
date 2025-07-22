@@ -28,7 +28,6 @@ function MyLetters() {
           withCredentials: true,
         });
         setRepliesNumber(data);
-        console.log(data.find(item => item.letter_id === 4).reply_count)
       } catch (err) {
         console.log(err);
       }
@@ -68,9 +67,9 @@ function MyLetters() {
             </p>
             <div className="flex flex-col gap-2">
               {letters.map((letter) => (
-                <div className=" flex gap-2 mx-auto w-fit">
-                  <div
-                    className={` letter2 flex gap-3 p-4 rounded-lg h-fit  transition-all pointer w-110 hover:scale-103 hover:rotate-1 items-center
+                <div className=" flex gap-2 mx-auto w-fit" key={letter.id}>
+                  <Link to={"/replies/"+letter.id}
+                    className={`pointer letter2 flex gap-3 p-4 rounded-lg h-fit  transition-all pointer w-110 hover:scale-103 hover:rotate-1 items-center
                   `}
                   >
                     <img
@@ -87,9 +86,9 @@ function MyLetters() {
                         {letter.music_artist}
                       </p>
                     </div>
-                  </div>
+                  </Link>
                   <div className="letter3 text-center text-white px-3 flex flex-col rounded-lg ">
-                    <p className="text-5xl mt-auto">{repliesNumber.find(item => item.letter_id === letter.id).reply_count}</p>
+                    <p className="text-5xl mt-auto">{repliesNumber.find(item => item.letter_id === letter.id)?.reply_count || "..."}</p>
                     <p className="text-2xl text-[#81724A] mb-1 -mt-2">
                       replies
                     </p>
