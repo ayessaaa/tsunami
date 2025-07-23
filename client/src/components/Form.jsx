@@ -5,7 +5,7 @@ function Form({ handleSubmit, type, email, setEmail, password, setPassword }) {
   return (
     <form onSubmit={(e)=>handleSubmit(e)}>
       <div
-        className={`pb-10 w-120 border-10  rounded-3xl mx-auto mt-30  ${
+        className={`pb-10 md:w-120 w-100 border-10  rounded-3xl mx-auto mt-30 transition-all  ${
           type === "signup"
             ? "border-white bg-white/30"
             : "border-[#368b90] bg-[#368b90]/30"
@@ -23,7 +23,7 @@ function Form({ handleSubmit, type, email, setEmail, password, setPassword }) {
             }`}
           >
             <p
-              className={`text-4xl text-center ${
+              className={`md:text-4xl text-3xl text-center transition-all ${
                 type === "signup" ? "text-white" : "text-[#368b90]"
               }`}
             >
@@ -33,25 +33,25 @@ function Form({ handleSubmit, type, email, setEmail, password, setPassword }) {
         </div>
 
         <div
-          className={` px-13 mt-10 ${
+          className={`*:transition-all px-13 mt-10 ${
             type === "signup" ? "text-[#368b90]" : "text-white"
           }`}
         >
-          <p className="text-3xl">email</p>
+          <p className="md:text-3xl text-2xl">email</p>
           <input
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             type="email"
-            className="w-full px-3 py-1 text-xl bg-white rounded-xl text-[#368b90] focus:bg-[#368b90] focus:text-white transition-all active:scale-102 focus:outline-0 focus:ring-3 focus:ring-[#286e72]"
+            className="w-full px-3 py-1 md:text-xl text-lg bg-white rounded-xl text-[#368b90] focus:bg-[#368b90] focus:text-white transition-all active:scale-102 focus:outline-0 focus:ring-3 focus:ring-[#286e72]"
           ></input>
-          <p className="text-3xl mt-5">password</p>
+          <p className="md:text-3xl text-2xl mt-5">password</p>
           <input
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type="password"
-            className="w-full px-3 py-1 text-xl bg-white rounded-xl text-[#368b90] focus:bg-[#368b90] focus:text-white transition-all active:scale-102 focus:outline-0 focus:ring-3 focus:ring-[#286e72]"
+            className="w-full px-3 py-1 md:text-xl text-lg bg-white rounded-xl text-[#368b90] focus:bg-[#368b90] focus:text-white transition-all active:scale-102 focus:outline-0 focus:ring-3 focus:ring-[#286e72]"
           ></input>
         </div>
         <div className="mx-auto w-fit mt-10 ">

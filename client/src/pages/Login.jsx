@@ -32,8 +32,8 @@ function Login() {
   }
   return (
     <>
-      <Logo height="h-50" />
-      <p className="text-center text-white text-2xl -mt-10">
+      <Logo height="md:h-50 h-40" />
+      <p className="text-center text-white md:text-2xl text-xl -mt-10 transition-all">
         listen to anonymous music recommendations!
       </p>
       <Form handleSubmit={handleSubmit} type={"login"} email={email} setEmail={setEmail} password={password} setPassword={setPassword} />

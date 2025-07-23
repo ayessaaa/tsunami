@@ -131,18 +131,18 @@ function OpenLetter() {
   return (
     <div>
       <div className="">
-        <Logo height={"h-50"} />
-        <p className="text-center text-white text-2xl -mt-10">
+        <Logo height={"md:h-50 h-40"} />
+        <p className="text-center text-white md:text-2xl text-xl transition-all -mt-10">
           listen to anonymous music recommendations!
         </p>
       </div>
       {!isOpen ? (
         <div>
-          <p className="text-white text-center text-4xl mt-15 animate__animated animate__fadeIn ">
+          <p className="text-white text-center transition-all md:text-4xl text-3xl mt-15 animate__animated animate__fadeIn ">
             woah a letter 4 u!
           </p>
           <img
-            className="mt-10 h-80 mx-auto animate__animated animate__pulse animate__infinite animate__slow"
+            className="mt-10 md:h-80 h-60 transition-all mx-auto animate__animated animate__pulse animate__infinite animate__slow"
             src="./imgs/drawings/bottle2.png"
           ></img>
 
@@ -156,18 +156,18 @@ function OpenLetter() {
         </div>
       ) : (
         <div>
-          <p className="text-white text-center text-4xl mt-15 animate__animated animate__fadeIn ">
+          <p className="text-white text-center md:text-4xl text-3xl mt-15 animate__animated animate__fadeIn ">
             woah a letter 4 u!
           </p>
           <LetterCard
-            className={`mt-5 animate__animated animate__fadeIn letter transition-all duration-1000 ease-in-out overflow-hidden p-8 ${
-              animation1 ? "w-[50%] " : "w-40 "
+            className={`mt-5 animate__animated animate__fadeIn letter transition-all duration-1000 ease-in-out overflow-hidden md:p-8 p-2 ${
+              animation1 ? "md:w-[50%] w-[95%] " : "w-40 "
             } `}
             x={false}
           >
-            <div className="pt-5 pb-3 px-18 h-full w-full -mt-10">
+            <div className="pt-5 pb-3 md:px-18 px-13 h-full w-full -mt-10">
               <p
-                className={`text-4xl transition-all duration-1000 text-center  ${
+                className={`md:text-4xl text-2xl transition-all duration-1000 text-center  ${
                   animationText1 ? "opacity-100 mt-5 " : "opacity-0  -mt-5"
                 }`}
               >
@@ -179,10 +179,10 @@ function OpenLetter() {
                     animation2 ? "opacity-100 mt-0" : "opacity-0 -mt-20"
                   } `}
                 >
-                  <img src={musicImg} className="h-16 rounded-xl"></img>
+                  <img src={musicImg} className="md:h-16 h-14 rounded-xl"></img>
                   <div className="mt-auto">
-                    <p className="text-2xl">{animation2 ? musicTitle : ""}</p>
-                    <p className="text-xl -mt-1 text-[#82734B]/70 -mb-1">
+                    <p className="md:text-2xl text-xl">{animation2 ? musicTitle : ""}</p>
+                    <p className="md:text-xl text-lg -mt-1 text-[#82734B]/70 -mb-1">
                       {animation2 ? musicArtist : ""}
                     </p>
                   </div>

@@ -130,7 +130,7 @@ function Replies() {
       </LetterCard>
       <div className={`mt-10  `}>
         <p className={`text-4xl text-white text-center duration-1000 transition-all mb-5 ${animation3 ? "opacity-100": "opacity-0"}`}>replies</p>
-        {letter.length<1 ? letter.map((reply) => (
+        {letter.length>0 ? letter.map((reply) => (
           <LetterCard x={false} className={`w-[40%] duration-1000 transition-all mb-5 ${animation4 ? "opacity-100": "opacity-0"}`}>
             <div className="pt-8 pb-1 px-18 h-full w-full -mt-10">
               <p

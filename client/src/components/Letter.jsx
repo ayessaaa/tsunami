@@ -81,23 +81,23 @@ function Letter({
     <form>
       <LetterCard
         className={`mt-5 animate__animated animate__fadeIn letter transition-all duration-1000 ease-in-out overflow-hidden  ${
-          animation1 ? "w-[50%] " : "w-40 "
+          animation1 ? "md:w-[50%] w-[95%] " : "w-40 "
         } `}
         x={true}
       >
-        <div className="pt-5 pb-3 px-18 h-full w-full -mt-10">
+        <div className="pt-5 pb-3 md:px-18 px-10 h-full w-full -mt-10">
           <div
             className={`transition-all duration-1000 ${
               animationText1 ? "opacity-100 mt-0 " : "opacity-0  -mt-30"
             }`}
           >
             <p
-              className={`text-4xl transition-all duration-1000 text-center  `}
+              className={`md:text-4xl text-3xl transition-all duration-1000 text-center  `}
             >
               message:
             </p>
             <textarea
-              className={` mb-3 text bg-[#BBAC7A]/40 rounded-xl w-full input-transition text-3xl py-3 px-5 mt-3 hover:bg-[#BBAC7A]/50  active:scale-102 focus:ring-3 focus:ring-[#BBAC7A] focus:outline-0 focus:bg-[#BBAC7A]/50`}
+              className={` mb-3 text bg-[#BBAC7A]/40 rounded-xl w-full input-transition md:text-3xl text-2xl md:py-3 py-2 md:px-5 px-3 mt-3 hover:bg-[#BBAC7A]/50  active:scale-102 focus:ring-3 focus:ring-[#BBAC7A] focus:outline-0 focus:bg-[#BBAC7A]/50`}
               onChange={(e) => setMessage(e.target.value)}
               value={message}
             ></textarea>
@@ -108,7 +108,7 @@ function Letter({
                 animation2 ? "opacity-100 mt-0 " : "opacity-0  -mt-15"
               } transition-all duration-1000`}
             >
-              <p className="text-3xl text-center">
+              <p className="md:text-3xl text-2xl text-center">
                 {animation2 && "search a song:"}&nbsp;
               </p>
               <div className="w-fit mx-auto">
@@ -123,7 +123,7 @@ function Letter({
                 {tracks.map((track) => (
                   <li
                     key={track.id}
-                    className="w-100 text-lg mx-auto flex items-center space-x-4 bg-white/40 p-2 rounded-xl pointer hover:scale-102 transition-all hover:bg-white/60"
+                    className="w-100 md:text-lg text-base mx-auto flex items-center space-x-4 bg-white/40 p-2 rounded-xl pointer hover:scale-102 transition-all hover:bg-white/60"
                     onClick={() => handleSongSelect(track)}
                   >
                     <img
@@ -134,8 +134,8 @@ function Letter({
                       className="rounded-lg"
                     />
                     <div>
-                      <div className="font-bold">{track.name}</div>
-                      <div className="text-md text-[#82734B]/70">
+                      <div className="font-bold md:text-lg text-base">{track.name}</div>
+                      <div className="md:text-lg text-base text-[#82734B]/70">
                         {track.artists.map((a) => a.name).join(", ")}
                       </div>
                     </div>
@@ -145,7 +145,7 @@ function Letter({
             </div>
           ) : (
             <div>
-              <p className="text-3xl transition-all duration-1000 text-center">
+              <p className="md:text-3xl text-2xl transition-all duration-1000 text-center">
                 recommended music:
               </p>
               <div className="flex gap-2  mx-auto w-fit mt-2">
@@ -156,13 +156,13 @@ function Letter({
                         ? musicImg
                         : "./imgs/song/cover_default.png"
                     }
-                    className="h-16 rounded-xl"
+                    className="md:h-16 h-14 rounded-xl"
                   ></img>
                   <div className="mt-auto">
-                    <p className="text-2xl">
+                    <p className="md:text-2xl text-xl">
                       {songSelected !== "" ? musicTitle : "no song selected"}
                     </p>
-                    <p className="text-xl -mt-1 text-[#82734B]/70 -mb-1">
+                    <p className="md:text-xl text-lg -mt-1 text-[#82734B]/70 -mb-1">
                       {songSelected !== "" ? musicArtist : ":("}
                     </p>
                   </div>

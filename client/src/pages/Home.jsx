@@ -30,25 +30,25 @@ function Home() {
 
   return (
     <>
-      <div className="mt-20">
-        <Logo height={"h-50"} />
-        <p className="text-center text-white text-2xl -mt-10">
+      <div className="md:mt-20 transition-all">
+        <Logo height={"md:h-50 h-40"} />
+        <p className="text-center text-white md:text-2xl text-xl -mt-10">
           listen to anonymous music recommendations!
         </p>
       </div>
-      <div className="flex w-fit mx-auto gap-15 mt-15">
+      <div className="flex md:flex-row flex-col w-fit mx-auto md:gap-15 gap-5 mt-15">
         <Link to={"/open-letter"}>
         <Card
           img="./imgs/drawings/bottle2.png"
           text="open a letter"
-          imgsize="size-70"
+          imgsize="md:size-70 size-50"
         />
         </Link>
         <Link to={"/write-letter"}>
         <Card
           img="./imgs/drawings/letter2.png"
           text="write a letter"
-          imgsize="size-70"
+          imgsize="md:size-70 size-50"
         />
         </Link>
       </div>

@@ -29,8 +29,8 @@ function Signup() {
 
   return (
     <>
-      <Logo height="h-50" />
-      <p className="text-center text-[white] text-2xl -mt-10">
+      <Logo height="md:h-50 h-40" />
+      <p className="text-center text-[white] md:text-2xl text-xl -mt-10">
         listen to anonymous music recommendations!
       </p>
       <Form

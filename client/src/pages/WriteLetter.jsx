@@ -71,12 +71,12 @@ function WriteLetter() {
   }, [message, songSelected]);
   return (
     <div>
-      <Logo height="h-50" />
-      <p className="text-center text-white text-2xl -mt-10">
+      <Logo height="md:h-50 h-40" />
+      <p className="text-center text-white md:text-2xl text-xl -mt-10">
         listen to anonymous music recommendations!
       </p>
       <div className="mt-15">
-        <p className="text-center text-4xl text-white mb-5">
+        <p className="text-center md:text-4xl text-2xl transition-all text-white mb-5">
           write a letter and a music reco ofc :)
         </p>
         <Letter

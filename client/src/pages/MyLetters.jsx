@@ -60,12 +60,12 @@ function MyLetters() {
   return (
     <div>
       <div className="">
-        <Logo height={"h-50"} />
-        <p className="text-center text-white text-2xl -mt-10">
+        <Logo height={"md:h-50 h-40"} />
+        <p className="text-center text-white md:text-2xl text-xl -mt-10">
           listen to anonymous music recommendations!
         </p>
       </div>
-      <div className="bg-[#368b90]/30 border-10 border-[#368b90] py-5 w-200 mx-auto px-5 rounded-2xl mt-10">
+      <div className="bg-[#368b90]/30 md:border-10 border-8 border-[#368b90] py-5 md:w-200 w-[95%] mx-auto md:px-5 px-2 rounded-2xl mt-10 transition-all">
         <p className="w-fit ml-auto text-6xl text-white -mt-5 mr-0 hover:rotate-10  transition-all">
           <Link className="pointer" to={"/home"}>
             x
@@ -73,11 +73,11 @@ function MyLetters() {
         </p>
         <img
           src="./imgs/drawings/scroll.png"
-          className="size-20 mx-auto -mt-10"
+          className="md:size-20 size-18 mx-auto -mt-10"
         ></img>
-        <p className="text-center text-4xl text-white">my letters</p>
+        <p className="text-center md:text-4xl text-3xl text-white">my letters</p>
         <div>
-          <div className="pt-5 pb-3 px-18 h-full w-full -mt-10">
+          <div className="pt-5 pb-3 md:px-18 px-2 transition-all h-full w-full -mt-10">
             <p
               className={`text-4xl transition-all duration-1000 text-center  `}
             >
@@ -87,27 +87,27 @@ function MyLetters() {
               {letters.map((letter) => (
                 <div className=" flex gap-2 mx-auto w-fit" key={letter.id}>
                   <Link to={"/replies/"+letter.id}
-                    className={`pointer letter2 flex gap-3 p-4 rounded-lg h-fit  transition-all pointer w-110 hover:scale-103 hover:rotate-1 items-center
+                    className={`*:transition-all pointer letter2 flex gap-3 p-4 rounded-lg h-fit  transition-all pointer md:w-110 w-80 hover:scale-103 hover:rotate-1 items-center
                   `}
                   >
                     <img
                       src={letter.music_img}
-                      className="h-16 rounded-xl"
+                      className="md:h-16 h-14 rounded-xl"
                     ></img>
                     <div className="mt-auto">
-                      <p className="text-2xl text-[#81724A]">
+                      <p className="md:text-2xl text-xl text-[#81724A]">
                         {/* {animation2 ? musicTitle : ""} */}
                         {letter.music_title}
                       </p>
-                      <p className="text-xl -mt-1 text-white/80 -mb-1">
+                      <p className="md:text-xl text-lg -mt-1 text-white/80 -mb-1">
                         {/* {animation2 ? musicArtist : ""} */}
                         {letter.music_artist}
                       </p>
                     </div>
                   </Link>
-                  <div className="letter3 text-center text-white px-3 flex flex-col rounded-lg ">
-                    <p className="text-5xl mt-auto">{repliesNumber.find(item => item.letter_id === letter.id)?.reply_count || "..."}</p>
-                    <p className="text-2xl text-[#81724A] mb-1 -mt-2">
+                  <div className="letter3 text-center text-white px-3 flex flex-col rounded-lg *:transition-all">
+                    <p className="md:text-5xl text-4xl mt-auto">{repliesNumber.find(item => item.letter_id === letter.id)?.reply_count || "..."}</p>
+                    <p className="md:text-2xl text-xl text-[#81724A] mb-1 -mt-2">
                       replies
                     </p>
                   </div>

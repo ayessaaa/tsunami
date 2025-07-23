@@ -11,9 +11,19 @@ body {
   font-family: handwriting;
   background-image: url("/imgs/bggif.gif");
   background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: 0 -230px;
+  background-size: cover; 
+  background-position: center -220px;
+  background-attachment: scroll;
+  background-color: #fff;
   padding-bottom: 50px;
+  min-height: 100vh;
+}
+
+@media (max-width: 1000px) {
+  body {
+      background-position: center top;
+
+  }
 }
 
 html,
