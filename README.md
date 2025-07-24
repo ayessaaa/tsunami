@@ -6,7 +6,7 @@
 
 # tsunami
 #### listen to anonymous music recommendations! 
-
+>https://tsunami.yessa.hackclub.app/
 
 ### what's this?
 a web app to share music recommendations anonymously. u can write letters with songs in it and wait for others to respond and give u a song recommendation as well!
@@ -26,7 +26,7 @@ i thought it might be cool to make an anon song reco and name the website from m
 >write a letter w a music recommendation and toss that to the ocean
 
 #### my letters
->shows ur collection of letters and peoples' reply to it
+>shows ur collection of letters and people's replies to it
 
 ### tech used
 react, express, nodejs, postgres, nest, spotify api
