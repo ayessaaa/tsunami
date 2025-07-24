@@ -11,19 +11,21 @@ function Signup() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const res = await axios.post(API_URL+"/signup", {
+      const res = await axios.post(API_URL + "/signup", {
         email,
         password,
       });
 
       console.log(res.data);
-      navigate("/home")
+      navigate("/home");
     } catch (err) {
       console.log(err);
+      setError(err.response.data.error);
     }
   }
 
@@ -34,6 +36,7 @@ function Signup() {
         listen to anonymous music recommendations!
       </p>
       <Form
+        error={error}
         handleSubmit={handleSubmit}
         type="signup"
         email={email}

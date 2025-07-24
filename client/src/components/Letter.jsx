@@ -123,7 +123,7 @@ function Letter({
                 {tracks.map((track) => (
                   <li
                     key={track.id}
-                    className="w-100 md:text-lg text-base mx-auto flex items-center space-x-4 bg-white/40 p-2 rounded-xl pointer hover:scale-102 transition-all hover:bg-white/60"
+                    className="md:w-100 w-60 md:text-lg text-base mx-auto flex items-center space-x-4 bg-white/40 p-2 rounded-xl pointer hover:scale-102 transition-all hover:bg-white/60"
                     onClick={() => handleSongSelect(track)}
                   >
                     <img

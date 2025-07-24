@@ -103,9 +103,9 @@ function Replies() {
         </p>
       </div>
       <p className="text-4xl text-white text-center mb-5 mt-5">my letter</p>
-      <LetterCard className={`${animation1 ? "w-[50%] " : "w-40 "} transition-all duration-1000 ease-in-out`}>
+      <LetterCard className={`${animation1 ? "md:w-[50%] w-[95%]" : "w-40 "} transition-all duration-1000 ease-in-out`}>
         <div className="pt-5 pb-3 px-18 h-full w-full -mt-10">
-          <p className={`text-4xl transition-all duration-1000 text-center ${
+          <p className={`md:text-4xl text-3xl transition-all duration-1000 text-center ${
                   animationText1 ? "opacity-100 mt-5 " : "opacity-0  -mt-5"
                 } `}>
             &nbsp;{animationText1 && letter[0]?.message || ""}
@@ -116,11 +116,11 @@ function Replies() {
             >
               <img
                 src={letter[0]?.music_img || ""}
-                className="h-16 rounded-xl"
+                className="md:h-16 h-14 rounded-xl"
               ></img>
               <div className="mt-auto">
-                <p className="text-2xl">{letter[0]?.music_title || ""}</p>
-                <p className="text-xl -mt-1 text-[#82734B]/70 -mb-1">
+                <p className="md:text-2xl text-xl">{letter[0]?.music_title || ""}</p>
+                <p className="md:text-xl text-lg -mt-1 text-[#82734B]/70 -mb-1">
                   {letter[0]?.music_artist || ""}
                 </p>
               </div>
@@ -130,11 +130,11 @@ function Replies() {
       </LetterCard>
       <div className={`mt-10  `}>
         <p className={`text-4xl text-white text-center duration-1000 transition-all mb-5 ${animation3 ? "opacity-100": "opacity-0"}`}>replies</p>
-        {letter.length>0 ? letter.map((reply) => (
-          <LetterCard x={false} className={`w-[40%] duration-1000 transition-all mb-5 ${animation4 ? "opacity-100": "opacity-0"}`}>
+        {letter[0]?.reply_id !== null ? letter.map((reply) => (
+          <LetterCard x={false} className={`md:w-[40%] w-[85%] duration-1000 transition-all mb-5 ${animation4 ? "opacity-100": "opacity-0"}`}>
             <div className="pt-8 pb-1 px-18 h-full w-full -mt-10">
               <p
-                className={`text-3xl transition-all duration-1000 text-center  `}
+                className={`md:text-3xl text-2xl transition-all duration-1000 text-center  `}
               >
                 {reply.reply_message}
               </p>
@@ -147,8 +147,8 @@ function Replies() {
                     className="h-14 rounded-xl"
                   ></img>
                   <div className="mt-auto">
-                    <p className="text-xl">{reply.reply_music_title || ""}</p>
-                    <p className="text-lg -mt-1 text-[#82734B]/70 -mb-1">
+                    <p className="md:text-xl text-lg">{reply.reply_music_title || ""}</p>
+                    <p className="md:text-lg text-base -mt-1 text-[#82734B]/70 -mb-1">
                       {reply.reply_music_artist || ""}
                     </p>
                   </div>

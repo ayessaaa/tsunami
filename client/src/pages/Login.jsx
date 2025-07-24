@@ -11,23 +11,25 @@ function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   axios.defaults.withCredentials = true;
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const res = await axios.post(API_URL+"/login", {
+      const res = await axios.post(API_URL + "/login", {
         email,
         password,
       });
 
       console.log(res.data);
-      if (res.data.auth){
-        navigate("/home")
+      if (res.data.auth) {
+        navigate("/home");
       }
     } catch (err) {
       console.log(err);
+      setError(err.response.data.error);
     }
   }
   return (
@@ -36,7 +38,15 @@ function Login() {
       <p className="text-center text-white md:text-2xl text-xl -mt-10 transition-all">
         listen to anonymous music recommendations!
       </p>
-      <Form handleSubmit={handleSubmit} type={"login"} email={email} setEmail={setEmail} password={password} setPassword={setPassword} />
+      <Form
+        error={error}
+        handleSubmit={handleSubmit}
+        type={"login"}
+        email={email}
+        setEmail={setEmail}
+        password={password}
+        setPassword={setPassword}
+      />
     </>
   );
 }

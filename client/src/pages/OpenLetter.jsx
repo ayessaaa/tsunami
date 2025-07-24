@@ -128,6 +128,8 @@ function OpenLetter() {
     return () => clearTimeout(timer);
   }, [animation2]);
 
+  console.log(message);
+
   return (
     <div>
       <div className="">
@@ -159,37 +161,49 @@ function OpenLetter() {
           <p className="text-white text-center md:text-4xl text-3xl mt-15 animate__animated animate__fadeIn ">
             woah a letter 4 u!
           </p>
-          <LetterCard
-            className={`mt-5 animate__animated animate__fadeIn letter transition-all duration-1000 ease-in-out overflow-hidden md:p-8 p-2 ${
-              animation1 ? "md:w-[50%] w-[95%] " : "w-40 "
-            } `}
-            x={false}
-          >
-            <div className="pt-5 pb-3 md:px-18 px-13 h-full w-full -mt-10">
-              <p
-                className={`md:text-4xl text-2xl transition-all duration-1000 text-center  ${
-                  animationText1 ? "opacity-100 mt-5 " : "opacity-0  -mt-5"
-                }`}
-              >
-                {animationText1 && message}&nbsp;
-              </p>
-              <div className="mt-5 flex gap-10">
-                <div
-                  className={`flex gap-3 bg-white/40 p-3 rounded-lg h-fit mx-auto transition-all duration-1000 ${
-                    animation2 ? "opacity-100 mt-0" : "opacity-0 -mt-20"
-                  } `}
+          {message === undefined ? (
+            <p className="md:text-2xl text-lg text-center transition-all mt-20 text-[#368b90] bg-[#368b90]/30 rounded-2xl py-2 px-5 w-fit mx-auto animate__pulse animate__slower animate__infinite animate__animated">
+              oops u kinda responded to all of em lol, come back later!<br></br>
+              make ur own music recos for now :p
+            </p>
+          ) : (
+            <LetterCard
+              className={`mt-5 animate__animated animate__fadeIn letter transition-all duration-1000 ease-in-out overflow-hidden md:p-8 p-2 ${
+                animation1 ? "md:w-[50%] w-[95%] " : "w-40 "
+              } `}
+              x={false}
+            >
+              <div className="pt-5 pb-3 md:px-18 px-13 h-full w-full -mt-10">
+                <p
+                  className={`md:text-4xl text-2xl transition-all duration-1000 text-center  ${
+                    animationText1 ? "opacity-100 mt-5 " : "opacity-0  -mt-5"
+                  }`}
                 >
-                  <img src={musicImg} className="md:h-16 h-14 rounded-xl"></img>
-                  <div className="mt-auto">
-                    <p className="md:text-2xl text-xl">{animation2 ? musicTitle : ""}</p>
-                    <p className="md:text-xl text-lg -mt-1 text-[#82734B]/70 -mb-1">
-                      {animation2 ? musicArtist : ""}
-                    </p>
+                  {animationText1 && message}&nbsp;
+                </p>
+                <div className="mt-5 flex gap-10">
+                  <div
+                    className={`flex gap-3 bg-white/40 p-3 rounded-lg h-fit mx-auto transition-all duration-1000 ${
+                      animation2 ? "opacity-100 mt-0" : "opacity-0 -mt-20"
+                    } `}
+                  >
+                    <img
+                      src={musicImg}
+                      className="md:h-16 h-14 rounded-xl"
+                    ></img>
+                    <div className="mt-auto">
+                      <p className="md:text-2xl text-xl">
+                        {animation2 ? musicTitle : ""}
+                      </p>
+                      <p className="md:text-xl text-lg -mt-1 text-[#82734B]/70 -mb-1">
+                        {animation2 ? musicArtist : ""}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </LetterCard>
+            </LetterCard>
+          )}
 
           {isReplyForm && (
             <Letter
@@ -206,22 +220,26 @@ function OpenLetter() {
             />
           )}
 
-          {!isReplyForm ? (
-            <WaveButton
-              onClick={() => setIsReplyForm(true)}
-              className={`${
-                animation3 ? "opacity-100" : "opacity-0 "
-              } duration-700 transition-all`}
-              text1={"reply!"}
-              text2={"share ur thoughts n reco also"}
-            ></WaveButton>
-          ) : messageReply !== "" && songSelected ? (
-            <WaveButton
-              onClick={handleReplyLetter}
-              className={`animate__animated animate__fadeIn`}
-              text1={"reply!"}
-              text2={"toss that back to sender"}
-            ></WaveButton>
+          {message !== undefined ? (
+            !isReplyForm ? (
+              <WaveButton
+                onClick={() => setIsReplyForm(true)}
+                className={`${
+                  animation3 ? "opacity-100" : "opacity-0 "
+                } duration-700 transition-all`}
+                text1={"reply!"}
+                text2={"share ur thoughts n reco also"}
+              ></WaveButton>
+            ) : messageReply !== "" && songSelected ? (
+              <WaveButton
+                onClick={handleReplyLetter}
+                className={`animate__animated animate__fadeIn`}
+                text1={"reply!"}
+                text2={"toss that back to sender"}
+              ></WaveButton>
+            ) : (
+              ""
+            )
           ) : (
             ""
           )}

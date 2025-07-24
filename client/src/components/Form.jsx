@@ -1,11 +1,11 @@
 import { Link } from "react-router";
 import WaveButton from "./WaveButton";
 
-function Form({ handleSubmit, type, email, setEmail, password, setPassword }) {
+function Form({ handleSubmit, type, email, setEmail, password, setPassword, error }) {
   return (
     <form onSubmit={(e)=>handleSubmit(e)}>
       <div
-        className={`pb-10 md:w-120 w-100 border-10  rounded-3xl mx-auto mt-30 transition-all  ${
+        className={`pb-10 md:w-120 w-90 border-10  rounded-3xl mx-auto mt-30 transition-all  ${
           type === "signup"
             ? "border-white bg-white/30"
             : "border-[#368b90] bg-[#368b90]/30"
@@ -18,7 +18,7 @@ function Form({ handleSubmit, type, email, setEmail, password, setPassword }) {
             className="h-20 mx-auto "
           />
           <div
-            className={` px-13 rounded-2xl py-2 -mt-1.5 ${
+            className={` md:px-13 px-8 rounded-2xl py-2 -mt-1.5 ${
               type === "signup" ? "bg-[#368b90]" : "bg-white"
             }`}
           >
@@ -32,10 +32,14 @@ function Form({ handleSubmit, type, email, setEmail, password, setPassword }) {
           </div>
         </div>
 
+        {error !== "" ? <div className="bg-red-400/30 mx-10 border-red-400/40 border- py-1 text-center text-red-200 text-lg md:text-xl rounded-2xl mt-5">{error}</div>:""}
+
+        
+
         <div
-          className={`*:transition-all px-13 mt-10 ${
+          className={`*:transition-all md:px-13 px-8  ${
             type === "signup" ? "text-[#368b90]" : "text-white"
-          }`}
+          } ${error !== "" ? "mt-5":"mt-10"}`}
         >
           <p className="md:text-3xl text-2xl">email</p>
           <input

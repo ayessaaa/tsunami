@@ -87,19 +87,19 @@ function MyLetters() {
               {letters.map((letter) => (
                 <div className=" flex gap-2 mx-auto w-fit" key={letter.id}>
                   <Link to={"/replies/"+letter.id}
-                    className={`*:transition-all pointer letter2 flex gap-3 p-4 rounded-lg h-fit  transition-all pointer md:w-110 w-80 hover:scale-103 hover:rotate-1 items-center
+                    className={`*:transition-all pointer letter2 flex gap-3 p-4 rounded-lg h-fit  transition-all pointer md:w-110 w-55 hover:scale-103 hover:rotate-1 items-center
                   `}
                   >
                     <img
                       src={letter.music_img}
-                      className="md:h-16 h-14 rounded-xl"
+                      className="md:h-16 h-12 rounded-xl"
                     ></img>
                     <div className="mt-auto">
-                      <p className="md:text-2xl text-xl text-[#81724A]">
+                      <p className="md:text-2xl text-lg text-[#81724A]">
                         {/* {animation2 ? musicTitle : ""} */}
                         {letter.music_title}
                       </p>
-                      <p className="md:text-xl text-lg -mt-1 text-white/80 -mb-1">
+                      <p className="md:text-xl text-base -mt-1 text-white/80 -mb-1">
                         {/* {animation2 ? musicArtist : ""} */}
                         {letter.music_artist}
                       </p>
